@@ -1,0 +1,5 @@
+yarn-error.log
+.cache
+.rpt2_cache
+node_modules
+src/**/*.js

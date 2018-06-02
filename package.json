@@ -1,0 +1,32 @@
+{
+  "name": "tree-shaking-demo",
+  "version": "1.0.0",
+  "description": "",
+  "sideEffects": false,
+  "scripts": {
+    "webpack3": "node webpack3",
+    "webpack4": "node webpack4",
+    "rollup": "rollup -c rollup/config.js",
+    "parcel": "node parcel"
+  },
+  "author": "kimamula",
+  "dependencies": {
+    "@types/lodash": "^4.14.109",
+    "@types/lodash-es": "^4.17.0",
+    "awesome-typescript-loader": "^5.0.0",
+    "awesome-typescript-loader4": "npm:awesome-typescript-loader@4",
+    "lodash": "^4.17.10",
+    "lodash-es": "^4.17.10",
+    "parcel-bundler": "^1.8.1",
+    "rollup": "^0.59.2",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-typescript2": "^0.14.0",
+    "rollup-plugin-uglify": "^4.0.0",
+    "string-replace-webpack-plugin": "^0.1.3",
+    "typescript": "^2.8.3",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.8.3",
+    "webpack3": "npm:webpack@3"
+  }
+}
