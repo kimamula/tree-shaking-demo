@@ -6,7 +6,8 @@ const StringReplacePlugin = require("string-replace-webpack-plugin");
 const entry = Object.assign.apply(null, [
   'import-from-lodash',
   'import-from-lodash-es',
-  'import-from-lodash-es-specify-path'
+  'import-from-lodash-es-specify-path',
+  'import-from-rxjs'
 ].map(file => ({ [file]: `./src/${file}.ts` })));
 
 webpack({

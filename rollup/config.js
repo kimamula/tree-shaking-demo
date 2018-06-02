@@ -7,7 +7,8 @@ import { minify } from 'uglify-es';
 export default [
   'import-from-lodash',
   'import-from-lodash-es',
-  'import-from-lodash-es-specify-path'
+  'import-from-lodash-es-specify-path',
+  'import-from-rxjs'
 ].map(file => ({
   input: `src/${file}.ts`,
   output: {

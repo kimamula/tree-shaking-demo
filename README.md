@@ -60,9 +60,9 @@ The following table shows the sizes of the bundles (after gzipped) created with 
 | Bundler   | `import { isEqual } from 'lodash';` | `import { isEqual } from 'lodash-es';` | `import isEqual from 'lodash-es/isEqual';` |
 | --------- | ----------------------------------: | -------------------------------------: | -----------------------------------------: |
 | webpack 3 |                            25,278 B |                               28,711 B |                                    4,595 B |
-| webpack 4 |                            25,255 B |                                4,251 B |                                    4,265 B |
+| webpack 4 |                            25,256 B |                                4,254 B |                                    4,264 B |
 | Rollup    |                            24,783 B |                               28,256 B |                                    4,006 B |
-| Parcel    |                            32,431 B |                               70,560 B |                                    7,854 B |
+| Parcel    |                            32,437 B |                               70,514 B |                                    7,855 B |
 
 - No bundler can tree shake `import { isEqual } from 'lodash';`
     - CommonJS cannot be tree shaken due to its dynamic feature
@@ -82,5 +82,27 @@ The following table shows the sizes of the bundles (after gzipped) created with 
     - `/*#__PURE__*/` annotation are used to notify UglifyJS that the function following the annotation is side effect free
     - TypeScript emits `/** @class */` annotation to classes and therefore by replacing `/** @class */` with `/*#__PURE__*/` unused classes can be tree shaken
     - Babel emits `/*#__PURE__*/` annotations for class IIFEs, so you do not need to add the annotation yourself
+    - The `/*@__PURE__*/` annotation works best with the `compress` option `passes=3`, thus setting this option is recommended for the both of TypeScript and Babel users.
     - see https://github.com/webpack/webpack/issues/2899 in detail
     - You can use [babel-minify](https://github.com/babel/minify), which is an ES6+ aware minifier that can process classes as they are, as an alternative, though there may be [a significant increase in the build time](https://github.com/babel/minify#benchmarks)
+
+# RxJS 6
+
+`import` paths of RxJS have changed in v6 from `import { Observable } from 'rxjs/Observable';` to `import { Observable } from 'rxjs';`.
+
+To confirm the new `import` paths are tree shakable for the all module bundlers that support tree shaking, the following code has been examined.
+
+```ts
+import { of } from 'rxjs';
+
+of('foo');
+```
+
+| Bundler   | `import { of } from 'rxjs';` |
+| --------- | ---------------------------: |
+| webpack 3 |                      3,743 B |
+| webpack 4 |                      3,310 B |
+| Rollup    |                      3,100 B |
+| Parcel    |                     20,058 B |
+
+The result shows that the bundle sizes of webpack 3, 4 and Rollup are compatible, indicating that the code of RxJS 6 is tree shakable even without the support of `"sideEffect: false`.
