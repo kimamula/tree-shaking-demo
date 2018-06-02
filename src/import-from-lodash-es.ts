@@ -1,6 +1,6 @@
 import { isEqual } from 'lodash-es';
 import { Greeter } from './export-class';
-import { b } from './export-possiblly-side-effects';
+import { f } from './export-possiblly-side-effects';
 import { foo } from './reexport';
 
-console.log(isEqual(new Greeter('foo').greet(), b), foo);
+console.log(isEqual(new Greeter('foo').greet(), f), foo);

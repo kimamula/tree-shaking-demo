@@ -23,10 +23,10 @@ To investigate how tree shaking works in each module bundler, the following file
 ```ts
 import { isEqual } from 'lodash';
 import { Greeter } from './export-class';
-import { b } from './export-possiblly-side-effects';
+import { f } from './export-possiblly-side-effects';
 import { foo } from './reexport';
 
-console.log(isEqual(new Greeter('foo').greet(), b), foo);
+console.log(isEqual(new Greeter('foo').greet(), f), foo);
 ```
 
 2. [import-from-lodash-es.ts](./src/import-from-lodash-es.ts)
@@ -34,10 +34,10 @@ console.log(isEqual(new Greeter('foo').greet(), b), foo);
 ```ts
 import { isEqual } from 'lodash-es';
 import { Greeter } from './export-class';
-import { b } from './export-possiblly-side-effects';
+import { f } from './export-possiblly-side-effects';
 import { foo } from './reexport';
 
-console.log(isEqual(new Greeter('foo').greet(), b), foo);
+console.log(isEqual(new Greeter('foo').greet(), f), foo);
 ```
 
 3. [import-from-lodash-es-specify-path.ts](./src/import-from-lodash-es-specify-path.ts)
@@ -45,10 +45,10 @@ console.log(isEqual(new Greeter('foo').greet(), b), foo);
 ```ts
 import isEqual from 'lodash-es/isEqual';
 import { Greeter } from './export-class';
-import { b } from './export-possiblly-side-effects';
+import { f } from './export-possiblly-side-effects';
 import { foo } from './reexport';
 
-console.log(isEqual(new Greeter('foo').greet(), b), foo);
+console.log(isEqual(new Greeter('foo').greet(), f), foo);
 ```
 
 `lodash` and `lodash-es` are CommonJS and ES Modules versions of [Lodash](https://lodash.com/) library, respectively.
@@ -59,10 +59,10 @@ The following table shows the sizes of the bundles (after gzipped) created with 
 
 | Bundler   | `import { isEqual } from 'lodash';` | `import { isEqual } from 'lodash-es';` | `import isEqual from 'lodash-es/isEqual';` |
 | --------- | ----------------------------------: | -------------------------------------: | -----------------------------------------: |
-| webpack 3 |                            25,288 B |                               28,720 B |                                    4,606 B |
-| webpack 4 |                            25,265 B |                                4,264 B |                                    4,275 B |
-| Rollup    |                            24,799 B |                               28,271 B |                                    4,020 B |
-| Parcel    |                            32,454 B |                               70,561 B |                                    7,863 B |
+| webpack 3 |                            25,288 B |                               28,720 B |                                    4,607 B |
+| webpack 4 |                            25,268 B |                                4,266 B |                                    4,277 B |
+| Rollup    |                            24,801 B |                               28,272 B |                                    4,021 B |
+| Parcel    |                            32,458 B |                               70,630 B |                                    7,874 B |
 
 - No bundler can tree shake `import { isEqual } from 'lodash';`
     - CommonJS cannot be tree shaken due to its dynamic feature
