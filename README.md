@@ -59,10 +59,10 @@ The following table shows the sizes of the bundles (after gzipped) created with 
 
 | Bundler   | `import { isEqual } from 'lodash';` | `import { isEqual } from 'lodash-es';` | `import isEqual from 'lodash-es/isEqual';` |
 | --------- | ----------------------------------: | -------------------------------------: | -----------------------------------------: |
-| webpack 3 |                            25,278 B |                               28,711 B |                                    4,595 B |
-| webpack 4 |                            25,256 B |                                4,254 B |                                    4,264 B |
-| Rollup    |                            24,783 B |                               28,256 B |                                    4,006 B |
-| Parcel    |                            32,437 B |                               70,514 B |                                    7,855 B |
+| webpack 3 |                            25,288 B |                               28,720 B |                                    4,606 B |
+| webpack 4 |                            25,265 B |                                4,264 B |                                    4,275 B |
+| Rollup    |                            24,799 B |                               28,271 B |                                    4,020 B |
+| Parcel    |                            32,454 B |                               70,561 B |                                    7,863 B |
 
 - No bundler can tree shake `import { isEqual } from 'lodash';`
     - CommonJS cannot be tree shaken due to its dynamic feature
