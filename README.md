@@ -75,7 +75,6 @@ The following table shows the sizes of the bundles (after gzipped) created with 
 - Parcel does not support tree shaking
     - They are [working on it](https://github.com/parcel-bundler/parcel/issues/392)
 - Rollup has [a list of side effect free functions](https://github.com/rollup/rollup/blob/v0.59.4/src/ast/nodes/shared/pureFunctions.ts) which is used to eliminate dead code
-    - This is one of reasons (I'm not sure there is any other) why Rollup can tree shake more effectively than webpack in the absence of `sideEffects: "false"`
     - If you pass the `pure_funcs` [compress option](https://github.com/mishoo/UglifyJS2#compress-options) to UglifyJS in webpack config, you can mimic the Rollup's behavior (see [webpack4/index.js](./webpack4/index.js))
 - If you are using TypeScript, replacing `/** @class */` with `/*#__PURE__*/` after transpiling and before uglifying may reduce your bundle's size
     - Classes are transpiled into IIFEs and it is generally hard to statically determine if an IIFE has side effects or not
