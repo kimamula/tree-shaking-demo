@@ -11,7 +11,8 @@ const options = {
   outDir: './parcel',
   minify: true,
   watch: false,
-  sourceMaps: false
+  sourceMaps: false,
+  scopeHoist: true
 };
 
 const bundler = new Bundler(files, options);
