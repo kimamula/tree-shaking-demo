@@ -62,18 +62,17 @@ The following table shows the sizes of the bundles (after gzipped) created with 
 | webpack 3 |                            25,288 B |                               28,720 B |                                    4,607 B |
 | webpack 4 |                            25,268 B |                                4,266 B |                                    4,277 B |
 | Rollup    |                            24,801 B |                               28,272 B |                                    4,021 B |
-| Parcel    |                            32,458 B |                               70,630 B |                                    7,874 B |
+| Parcel    |                             7,527 B |                                5,186 B |                                    5,917 B |
 
-- No bundler can tree shake `import { isEqual } from 'lodash';`
-    - CommonJS cannot be tree shaken due to its dynamic feature
-    - If you are using a transpiler such as Babel or TypeScript, you must not transpile your code into CommonJS (Notice `"module": "es2015"` in [tsconfig.json](./tsconfig.json) of this example)
-- Only webpack 4 can tree shake `import { isEqual } from 'lodash-es';`
+- Only Parcel can tree shake `import { isEqual } from 'lodash';`
+    - CommonJS is difficult to tree shake due to its dynamic feature
+    - If you are using a transpiler such as Babel or TypeScript, you'd better not transpile your code into CommonJS (Notice `"module": "es2015"` in [tsconfig.json](./tsconfig.json) of this example)
+- Only webpack 4 and Parcel can tree shake `import { isEqual } from 'lodash-es';`
     - Module bundlers do not eliminate lines which (possibly) contain side effects even if they are not imported from anywhere
     - It is difficult for module bundlers to accurately identify side effects (see https://github.com/rollup/rollup/wiki/Troubleshooting#tree-shaking-doesnt-seem-to-be-working)
     - Webpack 4 introduced [the `"sideEffects"` package.json property](https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free) to solve this issue, which is used to mark some (or all) of the files within a package as side effect free
+        - As of version 1.9.0, Parcel also started to support `"sideEffects: false"`
     - `"sideEffects: false"` affects tree shaking of not only library code but also application code (remove `"sideEffects: false"` from [package.json](./package.json) and check the result of `$ yarn webpack4`)
-- Parcel does not support tree shaking
-    - They are [working on it](https://github.com/parcel-bundler/parcel/issues/392)
 - Rollup has [a list of side effect free functions](https://github.com/rollup/rollup/blob/v0.59.4/src/ast/nodes/shared/pureFunctions.ts) which is used to eliminate dead code
     - If you pass the `pure_funcs` [compress option](https://github.com/mishoo/UglifyJS2#compress-options) to UglifyJS in webpack config, you can mimic the Rollup's behavior (see [webpack4/index.js](./webpack4/index.js))
 - If you are using TypeScript, replacing `/** @class */` with `/*#__PURE__*/` after transpiling and before uglifying may reduce your bundle's size
@@ -102,6 +101,6 @@ of('foo');
 | webpack 3 |                      3,743 B |
 | webpack 4 |                      3,310 B |
 | Rollup    |                      3,100 B |
-| Parcel    |                     20,058 B |
+| Parcel    |                      2,703 B |
 
-The result shows that the bundle sizes of webpack 3, 4 and Rollup are compatible, indicating that the code of RxJS 6 is tree shakable even without the support of `"sideEffect: false`.
+The result shows that the bundle sizes of webpack 3/4, Rollup and Parcel are compatible, indicating that the code of RxJS 6 is tree shakable even without the support of `"sideEffect: false`.
