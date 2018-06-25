@@ -103,4 +103,4 @@ of('foo');
 | Rollup    |                      3,100 B |
 | Parcel    |                      2,703 B |
 
-The result shows that the bundle sizes of webpack 3/4, Rollup and Parcel are compatible, indicating that the code of RxJS 6 is tree shakable even without the support of `"sideEffect: false`.
+The result shows that the bundle sizes of webpack 3/4, Rollup and Parcel are comparable, indicating that the code of RxJS 6 is tree shakable even without the support of `"sideEffect: false`.
